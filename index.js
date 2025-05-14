@@ -1,21 +1,52 @@
-class HelloWorld {
+class gaimeriWebAPIExtension {
   getInfo() {
     return {
-      id: 'helloworld',
-      name: 'It works!',
+      id: 'gaimeriwebapiextension',
+      name: 'Web APIs',
       blocks: [
         {
-          opcode: 'hello',
+          opcode: 'cookiesEnabled',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: 'cookies enabled?',
+          disableMonitor: true
+        },
+        {
+          opcode: 'deviceMemoApprox',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'Hello!'
+          text: 'approx. device memory',
+          disableMonitor: true
+        },
+        {
+          opcode: 'devicePosture',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device posture',
+          disableMonitor: false
+        },
+        {
+          opcode: 'logicalProcessorAmount',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'amount of logical processors available',
+          disableMonitor: false
         }
       ]
     };
   }
 
-  hello() {
-    return 'World!';
+  cookiesEnabled() {
+    return navigator.cookieEnabled;
+  }
+
+  deviceMemoApprox() {
+    return navigator.deviceMemory;
+  }
+
+  devicePosture(){
+    return navigator.devicePosture.type;
+  }
+
+  logicalProcessorAmount(){
+    return navigator.hardwareConcurrency;
   }
 }
 
-Scratch.extensions.register(new HelloWorld());
+Scratch.extensions.register(new gaimeriWebAPIExtension());
