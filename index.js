@@ -6,6 +6,9 @@ let deviceRotationRateB;
 let deviceRotationRateC;
 let deviceMotionInterval;
 
+let geolocationCoords;
+
+
 window.addEventListener("devicemotion", (event) => {
   deviceMotionAccelX = event.acceleration.x;
   deviceMotionAccelY = event.acceleration.y;
@@ -15,6 +18,14 @@ window.addEventListener("devicemotion", (event) => {
   deviceRotationRateC = event.rotationRate.gamma;
   deviceMotionInterval = event.interval;
 });
+
+function successGeolocation(pos) {
+ geolocationCoords = pos.coords;
+}
+
+function errorGeolocation(err) {
+ alert(err.message);
+}
 
 class gaimeriWebAPIExtension {
   getInfo() {
@@ -65,7 +76,7 @@ class gaimeriWebAPIExtension {
         {
           opcode: 'deviceMotionInterval',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'device motion capture interval',
+          text: 'device motion capture interval (ms)',
           disableMonitor: false
         },
         '---',
@@ -78,7 +89,44 @@ class gaimeriWebAPIExtension {
           blockType: Scratch.BlockType.REPORTER,
           text: 'device posture',
           disableMonitor: true
-        }
+        },
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Device Memory API',
+        },
+        {
+          opcode: 'deviceMemoApprox',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'approx. device memory (GB)',
+          disableMonitor: false
+        },
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Geolocation API',
+        },
+        {
+          opcode: 'getUserCoords',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'get user location'
+        },
+        {
+          opcode: 'userLatitude',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'user latitude',
+          disableMonitor: false
+        },
+        {
+          opcode: 'userLongitude',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'user longitude',
+          disableMonitor: false
+        },
+        {
+          opcode: 'geolocationAccuracy',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'geolocation accuracy (m)',
+          disableMonitor: false
+        },
       ]
     };
   }
@@ -108,6 +156,26 @@ class gaimeriWebAPIExtension {
 
   deviceMotionInterval(){
     return deviceMotionInterval;
+  }
+
+  deviceMemoApprox(){
+    return navigator.deviceMemory;
+  }
+
+  getUserCoords(){
+    return navigator.geolocation.getCurrentPosition(successGeolocation, errorGeolocation);
+  }
+
+  userLatitude() {
+    return geolocationCoords.latitude;
+  }
+
+  userLongitude() {
+    return geolocationCoords.longitude;
+  }
+
+  geolocationAccuracy() {
+    return geolocationCoords.accuracy;
   }
 }
 
