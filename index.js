@@ -218,6 +218,7 @@ class gaimeriWebAPIExtension {
           opcode: 'consoleError',
           blockType: Scratch.BlockType.COMMAND,
           text: 'error [MESSAGE]',
+          disableMonitor: true,
           arguments: {
             MESSAGE: {
               type: Scratch.ArgumentType.STRING,
@@ -329,6 +330,7 @@ class gaimeriWebAPIExtension {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           resolve(position);
+          successGeolocation(position);
         },
         (error) => {
           reject(error);
