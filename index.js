@@ -496,7 +496,7 @@ class gaimeriWebAPIExtension {
         {
           opcode: 'vibratePattern',
           blockType: Scratch.BlockType.COMMAND,
-          text: 'vibrate for [PATTERN] ms',
+          text: 'vibrate in pattern [PATTERN] ms',
           arguments: {
             PATTERN: {
               type: Scratch.ArgumentType.STRING,
