@@ -45,7 +45,7 @@ class gaimeriWebAPIExtension {
       blocks: [
         {
           blockType: Scratch.BlockType.LABEL,
-          text: '"⚠️" means a non-standard or deprecated function',
+          text: '"⚠️" means a non-standard or \ndeprecated function',
         },
         '---',
         {
@@ -214,7 +214,55 @@ class gaimeriWebAPIExtension {
           blockType: Scratch.BlockType.REPORTER,
           text: 'console data',
         },
-
+        {
+          opcode: 'consoleError',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'error [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'An error has occurred'
+            }
+          }
+        },
+        {
+          opcode: 'consoleException',
+          blockType: Scratch.BlockType.COMMAND,
+          text: '⚠️ exception [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'An exception has occurred'
+            }
+          }
+        },
+        {
+          opcode: 'consoleGroup',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'new uncollapsed group [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'group name'
+            }
+          }
+        },
+        {
+          opcode: 'consoleGroupClosed',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'new collapsed group [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'group name'
+            }
+          }
+        },
+        {
+          opcode: 'consoleGroupExit',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'exit current group'
+        },
       ]
     };
   }
@@ -305,6 +353,26 @@ class gaimeriWebAPIExtension {
 
   seeConsoleMessages() {
     return consoleLoggedMessages;
+  }
+
+  consoleError(args) {
+    console.error(args.MESSAGE);
+  }
+
+  consoleException(args) {
+    console.exception(args.MESSAGE);
+  }
+
+  consoleGroup(args) {
+    console.group(args.LABEL);
+  }
+
+  consoleGroupClosed(args) {
+    console.groupCollapsed(args.LABEL);
+  }
+
+  consoleGroupExit() {
+    console.groupEnd();
   }
 
 }
