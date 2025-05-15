@@ -6,7 +6,7 @@ let deviceRotationRateB;
 let deviceRotationRateC;
 let deviceMotionInterval;
 
-let geolocationCoords;
+let geolocationCoords = {"latitude": "unknown", "longitude": "unknown", "accuracy": "unknown"};
 
 
 window.addEventListener("devicemotion", (event) => {
