@@ -375,7 +375,7 @@ class gaimeriWebAPIExtension {
   }
 
   seeConsoleMessages() {
-    return consoleLoggedMessages;
+    return JSON.stringify(consoleLoggedMessages);
   }
 
   consoleError(args) {
