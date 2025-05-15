@@ -8,6 +8,9 @@ let deviceMotionInterval;
 
 let geolocationCoords = {"latitude": "unknown", "longitude": "unknown", "accuracy": "unknown"};
 
+const consoleLoggedMessages = [];
+const originalConsoleLog = console.log;
+
 
 window.addEventListener("devicemotion", (event) => {
   deviceMotionAccelX = event.acceleration.x;
@@ -28,6 +31,11 @@ function successGeolocation(pos) {
 function errorGeolocation(err) {
  alert(err.message);
 }
+
+console.log = function(...args) {
+  consoleLoggedMessages.push(args.join(' '));
+  originalConsoleLog.apply(console, args);
+};
 
 class gaimeriWebAPIExtension {
   getInfo() {
@@ -201,6 +209,11 @@ class gaimeriWebAPIExtension {
             }
           }
         },
+        {
+          opcode: 'seeConsoleMessages',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'console data',
+        },
 
       ]
     };
@@ -288,6 +301,10 @@ class gaimeriWebAPIExtension {
 
   consoleLogRaw(args) {
     console.dir(args.MESSAGE);
+  }
+
+  seeConsoleMessages() {
+    return consoleLoggedMessages;
   }
 
 }
