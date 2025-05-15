@@ -504,6 +504,37 @@ class gaimeriWebAPIExtension {
             }
           }
         },
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'History API',
+        },
+        {
+          opcode: 'historyBack',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'go back in history'
+        },
+        {
+          opcode: 'historyForward',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'go forward in history'
+        },
+        {
+          opcode: 'historyMove',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'move [NUMBER] pages in history',
+          arguments: {
+            NUMBER: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 2
+            }
+          }
+        },
+        {
+          opcode: 'historyLength',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'history length',
+          disableMonitor: true
+        }
       ]
     };
   }
@@ -672,6 +703,22 @@ class gaimeriWebAPIExtension {
 
   vibratePattern(args) {
     navigator.vibrate(args.PATTERN);
+  }
+
+  historyBack() {
+    history.back();
+  }
+
+  historyForward() {
+    history.forward();
+  }
+
+  historyMove(args) {
+    history.go(args.NUMBER);
+  }
+
+  historyLength() {
+    return history.length;
   }
 }
 
