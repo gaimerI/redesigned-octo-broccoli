@@ -8,9 +8,18 @@ let deviceMotionInterval;
 
 let geolocationCoords = {"latitude": "unknown", "longitude": "unknown", "accuracy": "unknown"};
 
+// =====
+// This extension modifies the console methods, for it to be able to read them. This should not break anything.
+// =====
+
 let consoleLoggedMessages = [];
 const originalConsoleLog = console.log;
-
+const originalConsoleInfo = console.info;
+const originalConsoleLog = console.error;
+const originalConsoleDebug = console.debug;
+const originalConsoleTimeLog = console.timeLog;
+const originalConsoleAssert = console.assert;
+const originalConsoleCount = console.count;
 
 window.addEventListener("devicemotion", (event) => {
   deviceMotionAccelX = event.acceleration.x;
@@ -37,6 +46,38 @@ console.log = function(...args) {
   originalConsoleLog.apply(console, args);
 };
 
+console.info = function(...args) {
+  consoleLoggedMessages.push(args.join(' '));
+  originalConsoleInfo.apply(console, args);
+};
+
+console.error = function(...args) {
+  consoleLoggedMessages.push(args.join(' '));
+  originalConsoleError.apply(console, args);
+};
+
+console.debug = function(...args) {
+  consoleLoggedMessages.push(args.join(' '));
+  originalConsoleDebug.apply(console, args);
+};
+
+console.timeLog = function(label, ...args) {
+  consoleLoggedMessages.push(`TimeLog [${label}]: ${args.join(' ')}`);
+  originalConsoleTimeLog.apply(console, [label, ...args]);
+};
+
+console.assert = function(condition, ...args) {
+  if (!condition) {
+    consoleLoggedMessages.push(`Assert failed: ${args.join(' ')}`);
+    originalConsoleAssert.apply(console, args);
+  }
+};
+
+console.count = function(label) {
+  consoleLoggedMessages.push(`Count [${label}]: ${label}`);
+  originalConsoleCount.call(console, label);
+};
+
 class gaimeriWebAPIExtension {
   getInfo() {
     return {
@@ -45,7 +86,7 @@ class gaimeriWebAPIExtension {
       blocks: [
         {
           blockType: Scratch.BlockType.LABEL,
-          text: '"⚠" means a non-standard or \ndeprecated function',
+          text: `"⚠" means a non-standard or \ndeprecated function`,
         },
         {
           blockType: Scratch.BlockType.LABEL,
