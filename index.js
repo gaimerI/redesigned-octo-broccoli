@@ -473,6 +473,37 @@ class gaimeriWebAPIExtension {
             }
           }
         },
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Vibration API',
+        },
+        {
+          opcode: 'vibrateSingle',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'vibrate for [NUMBER] ms',
+          arguments: {
+            NUMBER: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: '200'
+            }
+          }
+        },
+        {
+          opcode: 'vibrateStop',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'stop vibration'
+        },
+        {
+          opcode: 'vibratePattern',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'vibrate for [PATTERN] ms',
+          arguments: {
+            PATTERN: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: '[200, 100, 200]'
+            }
+          }
+        },
       ]
     };
   }
@@ -629,6 +660,18 @@ class gaimeriWebAPIExtension {
 
   consoleWarn(args) {
     console.warn(args.MESSAGE);
+  }
+
+  vibrateSingle(args) {
+    navigator.vibrate(args.NUMBER);
+  }
+
+  vibrateStop() {
+    navigator.vibrate(0);
+  }
+
+  vibratePattern(args) {
+    navigator.vibrate(args.PATTERN);
   }
 }
 
