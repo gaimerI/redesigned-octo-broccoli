@@ -8,7 +8,7 @@ let deviceMotionInterval;
 
 let geolocationCoords = {"latitude": "unknown", "longitude": "unknown", "accuracy": "unknown"};
 
-const consoleLoggedMessages = [];
+let consoleLoggedMessages = [];
 const originalConsoleLog = console.log;
 
 
@@ -333,6 +333,7 @@ class gaimeriWebAPIExtension {
 
   consoleClear() {
     console.clear;
+    consoleLoggedMessages = new Array();
   }
 
   consoleCount(args) {
