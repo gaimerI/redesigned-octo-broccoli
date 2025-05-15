@@ -15,7 +15,7 @@ let geolocationCoords = {"latitude": "unknown", "longitude": "unknown", "accurac
 let consoleLoggedMessages = [];
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
-const originalConsoleLog = console.error;
+const originalConsoleError = console.error;
 const originalConsoleDebug = console.debug;
 const originalConsoleTimeLog = console.timeLog;
 const originalConsoleAssert = console.assert;
@@ -86,7 +86,8 @@ class gaimeriWebAPIExtension {
       blocks: [
         {
           blockType: Scratch.BlockType.LABEL,
-          text: `"⚠" means a non-standard or \ndeprecated function`,
+          text: `"⚠" means a non-standard or
+          deprecated function`,
         },
         {
           blockType: Scratch.BlockType.LABEL,
@@ -331,6 +332,28 @@ class gaimeriWebAPIExtension {
             }
           }
         },
+        {
+        opcode: 'consoleProfile',
+          blockType: Scratch.BlockType.COMMAND,
+          text: '⚠ start recording profile [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'profile name'
+            }
+          }
+        },
+        {
+          opcode: 'consoleProfileEnd',
+          blockType: Scratch.BlockType.COMMAND,
+          text: '⚠ stop recording group [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'profile name'
+            }
+          }
+        },
       ]
     };
   }
@@ -451,6 +474,14 @@ class gaimeriWebAPIExtension {
 
   consoleLog(args) {
     console.log(args.MESSAGE);
+  }
+
+  consoleProfile(args) {
+    console.profile(args.LABEL);
+  }
+
+  consoleProfileEnd(args) {
+    console.profileEnd(args.LABEL);
   }
 
 }
