@@ -162,8 +162,21 @@ class gaimeriWebAPIExtension {
     return navigator.deviceMemory;
   }
 
-  getUserCoords(){
-    return navigator.geolocation.getCurrentPosition(successGeolocation, errorGeolocation);
+  devicePostureCurrent(){
+    return navigator.devicePosture;
+  }
+
+  getUserCoords() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve(position);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   }
 
   userLatitude() {
