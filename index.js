@@ -45,7 +45,11 @@ class gaimeriWebAPIExtension {
       blocks: [
         {
           blockType: Scratch.BlockType.LABEL,
-          text: '"⚠️" means a non-standard or \ndeprecated function',
+          text: '"⚠" means a non-standard or \ndeprecated function',
+        },
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'deprecated function',
         },
         '---',
         {
@@ -229,7 +233,7 @@ class gaimeriWebAPIExtension {
         {
           opcode: 'consoleException',
           blockType: Scratch.BlockType.COMMAND,
-          text: '⚠️ exception [MESSAGE]',
+          text: '⚠ exception [MESSAGE]',
           arguments: {
             MESSAGE: {
               type: Scratch.ArgumentType.STRING,
