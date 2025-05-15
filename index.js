@@ -23,6 +23,10 @@ class gaimeriWebAPIExtension {
       name: 'Web APIs',
       blocks: [
         {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Device Orientation API',
+        },
+        {
           opcode: 'deviceAccelerationX',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device acceleration x',
@@ -64,6 +68,17 @@ class gaimeriWebAPIExtension {
           text: 'device motion capture interval',
           disableMonitor: false
         },
+        '---',
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Device Posture API',
+        },
+        {
+          opcode: 'devicePostureCurrent',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device posture',
+          disableMonitor: true
+        }
       ]
     };
   }
