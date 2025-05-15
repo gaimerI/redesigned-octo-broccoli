@@ -148,7 +148,7 @@ class gaimeriWebAPIExtension {
             },
             MESSAGE: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: 'assertion is false 
+              defaultValue: 'assertion is false'
             }
           }
         },
