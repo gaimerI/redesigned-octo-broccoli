@@ -179,6 +179,29 @@ class gaimeriWebAPIExtension {
             }
           }
         },
+        {
+          opcode: 'consoleDebug',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'debug [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Hello, World!'
+            }
+          }
+        },
+        {
+          opcode: 'consoleLogRaw',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'log object [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: '{"Hello": "World!", "foo": "bar"}'
+            }
+          }
+        },
+
       ]
     };
   }
@@ -257,6 +280,14 @@ class gaimeriWebAPIExtension {
 
   consoleCountReset(args) {
     console.countReset(args.LABEL);
+  }
+
+  consoleDebug(args) {
+    console.debug(args.MESSAGE);
+  }
+
+  consoleLogRaw(args) {
+    console.dir(args.MESSAGE);
   }
 
 }
