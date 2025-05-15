@@ -20,6 +20,15 @@ const originalConsoleDebug = console.debug;
 const originalConsoleTimeLog = console.timeLog;
 const originalConsoleAssert = console.assert;
 const originalConsoleCount = console.count;
+const originalConsoleGroup = console.group;
+const originalConsoleGroupEnd = console.groupEnd;
+const originalConsoleTable = console.table;
+const originalConsoleWarn = console.warn;
+const originalConsoleTrace = console.trace;
+const originalConsoleDir = console.dir;
+const originalConsoleTime = console.time;
+const originalConsoleTimeEnd = console.timeEnd;
+const originalConsoleTimeStamp = console.timeStamp;
 
 window.addEventListener("devicemotion", (event) => {
   deviceMotionAccelX = event.acceleration.x;
@@ -42,22 +51,22 @@ function errorGeolocation(err) {
 }
 
 console.log = function(...args) {
-  consoleLoggedMessages.push(args.join(' '));
+  consoleLoggedMessages.push(`Log: ${args.join(' ')}`);
   originalConsoleLog.apply(console, args);
 };
 
 console.info = function(...args) {
-  consoleLoggedMessages.push(args.join(' '));
+  consoleLoggedMessages.push(`Info: ${args.join(' ')}`);
   originalConsoleInfo.apply(console, args);
 };
 
 console.error = function(...args) {
-  consoleLoggedMessages.push(args.join(' '));
+  consoleLoggedMessages.push(`Error: ${args.join(' ')}`);
   originalConsoleError.apply(console, args);
 };
 
 console.debug = function(...args) {
-  consoleLoggedMessages.push(args.join(' '));
+  consoleLoggedMessages.push(`Debug: ${args.join(' ')}`);
   originalConsoleDebug.apply(console, args);
 };
 
@@ -78,6 +87,46 @@ console.count = function(label) {
   originalConsoleCount.call(console, label);
 };
 
+console.group = function(...args) {
+  consoleLoggedMessages.push(`Group: ${args.join(' ')}`);
+  originalConsoleGroup.apply(console, args);
+};
+
+console.groupEnd = function() {
+  consoleLoggedMessages.push('Group End');
+  originalConsoleGroupEnd.apply(console);
+};
+
+console.table = function(data) {
+  consoleLoggedMessages.push(`Table: ${JSON.stringify(data)}`);
+  originalConsoleTable.apply(console, arguments);
+};
+
+console.warn = function(...args) {
+  consoleLoggedMessages.push(`Warning: ${args.join(' ')}`);
+  originalConsoleWarn.apply(console, args);
+};
+
+console.trace = function(...args) {
+  consoleLoggedMessages.push(`Trace: ${args.join(' ')}`);
+  originalConsoleTrace.apply(console, args);
+};
+
+console.dir = function(obj) {
+  consoleLoggedMessages.push(`Dir: ${JSON.stringify(obj)}`);
+  originalConsoleDir.apply(console, arguments);
+};
+
+console.timeEnd = function(label) {
+  consoleLoggedMessages.push(`Timer ended: ${label}`);
+  originalConsoleTimeEnd.apply(console, arguments);
+};
+
+console.timeStamp = function(label) {
+  consoleLoggedMessages.push(`Timestamp: ${label}`);
+  originalConsoleTimeStamp.apply(console, arguments); // I am not sure if it's possible to use the time / timestamp etc. that the original method reports.
+};
+
 class gaimeriWebAPIExtension {
   getInfo() {
     return {
@@ -86,8 +135,7 @@ class gaimeriWebAPIExtension {
       blocks: [
         {
           blockType: Scratch.BlockType.LABEL,
-          text: `"⚠" means a non-standard or
-          deprecated function`,
+          text: `"⚠" means a non-standard or`,
         },
         {
           blockType: Scratch.BlockType.LABEL,
@@ -354,6 +402,77 @@ class gaimeriWebAPIExtension {
             }
           }
         },
+        {
+          opcode: 'consoleTable',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'table [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: '["Apple", "Banana"]'
+            }
+          }
+        },
+        {
+          opcode: 'consoleTime',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'start timer [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'timer name'
+            }
+          }
+        },
+        {
+          opcode: 'consoleTimeEnd',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'end timer [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'timer name'
+            }
+          }
+        },
+        {
+          opcode: 'consoleTimeLog',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'log timer [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'timer name'
+            }
+          }
+        },
+        {
+          opcode: 'consoleTimeStamp',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'current timestamp [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'timestamp name'
+            }
+          }
+        },
+        {
+          opcode: 'consoleTrace',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'trace',
+        },
+        {
+          opcode: 'consoleWarn',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'warn [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Oops'
+            }
+          }
+        },
       ]
     };
   }
@@ -484,6 +603,33 @@ class gaimeriWebAPIExtension {
     console.profileEnd(args.LABEL);
   }
 
+  consoleTable(args) {
+    console.table(args.MESSAGE);
+  }
+
+  consoleTime(args) {
+    console.time(args.LABEL);
+  }
+
+  consoleTimeEnd(args) {
+    console.timeEnd(args.LABEL);
+  }
+
+  consoleTimeLog(args) {
+    console.timeLog(args.LABEL);
+  }
+
+  consoleTimeStamp(args) {
+    console.timeStamp(args.LABEL);
+  }
+
+  consoleTrace() {
+    console.trace();
+  }
+
+  consoleWarn(args) {
+    console.warn(args.MESSAGE);
+  }
 }
 
 Scratch.extensions.register(new gaimeriWebAPIExtension());
