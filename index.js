@@ -20,7 +20,9 @@ window.addEventListener("devicemotion", (event) => {
 });
 
 function successGeolocation(pos) {
- geolocationCoords = pos.coords;
+  geolocationCoords.latitude = pos.coords.latitude;
+  geolocationCoords.longitude = pos.coords.longitude;
+  geolocationCoords.accuracy = pos.coords.accuracy;
 }
 
 function errorGeolocation(err) {
@@ -33,6 +35,11 @@ class gaimeriWebAPIExtension {
       id: 'gaimeriwebapiextension',
       name: 'Web APIs',
       blocks: [
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: '"⚠️" means a non-standard or deprecated function',
+        },
+        '---',
         {
           blockType: Scratch.BlockType.LABEL,
           text: 'Device Orientation API',
@@ -127,6 +134,51 @@ class gaimeriWebAPIExtension {
           text: 'geolocation accuracy (m)',
           disableMonitor: false
         },
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Console API',
+        },
+        {
+          opcode: 'consoleAssert',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'assert [CONDITION] message: [MESSAGE]',
+          arguments: {
+            CONDITION: {
+              type: Scratch.ArgumentType.BOOLEAN
+            },
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'assertion is false 
+            }
+          }
+        },
+        {
+          opcode: 'consoleClear',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'clear'
+        },
+        {
+          opcode: 'consoleCount',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'count [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'default'
+            }
+          }
+        },
+        {
+          opcode: 'consoleCountReset',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'reset count [LABEL]',
+          arguments: {
+            LABEL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'default'
+            }
+          }
+        },
       ]
     };
   }
@@ -163,7 +215,7 @@ class gaimeriWebAPIExtension {
   }
 
   devicePostureCurrent(){
-    return navigator.devicePosture;
+    return navigator.devicePosture.type;
   }
 
   getUserCoords() {
@@ -190,6 +242,23 @@ class gaimeriWebAPIExtension {
   geolocationAccuracy() {
     return geolocationCoords.accuracy;
   }
+
+  consoleAssert(args) {
+    console.assert(args.CONDITION, args.MESSAGE);
+  }
+
+  consoleClear() {
+    console.clear;
+  }
+
+  consoleCount(args) {
+    console.count(args.LABEL);
+  }
+
+  consoleCountReset(args) {
+    console.countReset(args.LABEL);
+  }
+
 }
 
 Scratch.extensions.register(new gaimeriWebAPIExtension());
