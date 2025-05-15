@@ -263,6 +263,28 @@ class gaimeriWebAPIExtension {
           blockType: Scratch.BlockType.COMMAND,
           text: 'exit current group'
         },
+        {
+          opcode: 'consoleInfo',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'info [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Also try DinosaurMod'
+            }
+          }
+        },
+        {
+          opcode: 'consoleLog',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'log [MESSAGE]',
+          arguments: {
+            MESSAGE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'sjksuzvslozvxb'
+            }
+          }
+        },
       ]
     };
   }
@@ -374,6 +396,14 @@ class gaimeriWebAPIExtension {
 
   consoleGroupExit() {
     console.groupEnd();
+  }
+
+  consoleInfo(args) {
+    console.info(args.MESSAGE);
+  }
+
+  consoleLog(args) {
+    console.log(args.MESSAGE);
   }
 
 }
