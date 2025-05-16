@@ -58,6 +58,13 @@ class gaimeriDeviceMotionExtension {
           disableMonitor: false
         },
         {
+          opcode: 'deviceAccelerationMagnitude',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device acceleration magnitude',
+          disableMonitor: false
+        },
+        '---',
+        {
           opcode: 'deviceRotationA',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device rotation rate alpha',
@@ -75,12 +82,14 @@ class gaimeriDeviceMotionExtension {
           text: 'device rotation rate gamma',
           disableMonitor: false
         },
+        '---',
         {
           opcode: 'deviceMotionInterval',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device motion capture interval (ms)',
           disableMonitor: false
         },
+        '---',
         {
           opcode: 'deviceDirectionA',
           blockType: Scratch.BlockType.REPORTER,
@@ -118,6 +127,10 @@ class gaimeriDeviceMotionExtension {
 
   deviceAccelerationZ(){
     return deviceMotionAccelZ;
+  }
+
+  deviceAccelerationMagnitude(){
+    return Math.sqrt(acceleration.x * acceleration.x + acceleration.y * acceleration.y + acceleration.z * acceleration.z);
   }
 
   deviceRotationA(){
