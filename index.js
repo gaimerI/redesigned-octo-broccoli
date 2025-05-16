@@ -803,11 +803,11 @@ class gaimeriWebAPIExtension {
     return batteryLevel;
   }
 
-  batteryChargingTime() {
+  batteryChargeTime() {
     return batteryChargeTime;
   }
 
-  batteryDischargingTime(){
+  batteryDischargeTime(){
     return batteryDischargeTime;
   }
 }
