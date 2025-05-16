@@ -22,7 +22,6 @@ class .gaimeriDeviceMotionExtension {
       name: 'Device Motion',
       blocks: [
         {
-        {
           opcode: 'deviceAccelerationX',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device acceleration x',
