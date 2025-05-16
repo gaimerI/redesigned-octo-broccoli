@@ -1,62 +1,62 @@
- let deviceMotionAccelX;
-  let deviceMotionAccelY;
-  let deviceMotionAccelZ;
-  let deviceRotationRateA;
-  let deviceRotationRateB;
-  let deviceRotationRateC;
-  let deviceMotionInterval;
+let deviceMotionAccelX;
+let deviceMotionAccelY;
+let deviceMotionAccelZ;
+let deviceRotationRateA;
+let deviceRotationRateB;
+let deviceRotationRateC;
+let deviceMotionInterval;
 
-  const menuIconURI = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2Ni4yNTgiIGhlaWdodD0iNzMuMDIxIiB2aWV3Qm94PSIwIDAgNjYuMjU4IDczLjAyMSI+PGcgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIj48cGF0aCBkPSJNMTYuMDMyIDM4LjgyNnYtNC42MzJoMzQuMTk0djQuNjMyeiIgZmlsbD0iIzAwMDFmZiIvPjxwYXRoIGQ9Ik0zMC44MTMgNTMuNjA3VjE5LjQxM2g0LjYzMnYzNC4xOTR6bS0yLjMzMS0zNC4xOTQgNC42NjItNC42MzIgNC42NjIgNC42MzJ6IiBmaWxsPSIjMDFmZjAwIi8+PHBhdGggZD0iTTI3Ljk5NSA0Ny4xNjJhMS44NTcgMS44NTcgMCAwIDEtMS44NTctMS44NThsLS4wMTMtMTcuNjE2YzAtMS4wMjYuODMyLTEuODU4IDEuODU4LTEuODU4bDEwLjI5Mi4wNGMxLjAyNiAwIDEuODU4LjgzIDEuODU4IDEuODU2bC0uMTIgMTcuNjA2YTEuODU3IDEuODU3IDAgMCAxLTEuODU3IDEuODU4eiIgc3Ryb2tlPSIjMDAwIi8+PHBhdGggZD0iTTI2LjgxOSA0My4zOTV2LTE1LjM2aDEyLjYydjE1LjM2eiIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjMDAwIi8+PHBhdGggZD0iTTMwLjc5OCAyNy4wMDNWMjUuODNoNC42NjJ2MS4xNzN6bTEuMTcxIDE4LjI2OWExLjE2IDEuMTYgMCAxIDEgMi4zMiAwIDEuMTYgMS4xNiAwIDAgMS0yLjMyIDB6IiBmaWxsPSIjZmZmIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iLjUiLz48cGF0aCBkPSJNMS4yNSAzNi41MWMwLTE3LjYwNiAxNC4yNzMtMzEuODc5IDMxLjg3OS0zMS44NzlTNjUuMDA4IDE4LjkwNCA2NS4wMDggMzYuNTEgNTAuNzM1IDY4LjM4OSAzMy4xMjkgNjguMzg5IDEuMjUgNTQuMTE2IDEuMjUgMzYuNTF6IiBmaWxsPSJub25lIiBzdHJva2U9InJlZCIgc3Ryb2tlLXdpZHRoPSIyLjUiLz48cGF0aCBkPSJNMzMuMTY1IDkuMjYzVjQuNjMxaDQuNjMxem00LjYzMS00LjYzMmgtNC42MzFWMHptLTkuMzM3IDYzLjc1OGg0LjYzMnY0LjYzMXptNC42MzItNC42MzJ2NC42MzJoLTQuNjMyeiIgZmlsbD0icmVkIi8+PHBhdGggZD0ibTExLjQgMzYuNTEgNC42MzItNC42MzJ2OS4yNjR6bTM4LjgzOSA0LjYzMnYtOS4yNjNsNC42MyA0LjYzMXoiIGZpbGw9IiMwMDAxZmYiLz48cGF0aCBkPSJtMzcuNzE0IDUzLjYwNy00LjY2MiA0LjYzMi00LjY2Mi00LjYzMnoiIGZpbGw9IiMwMWZmMDAiLz48L2c+PC9zdmc+";
+const menuIconURI = "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI3MS4zMzAyNiIgaGVpZ2h0PSI3OC44MzAyNSIgdmlld0JveD0iMCwwLDcxLjMzMDI2LDc4LjgzMDI1Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjA0LjMzNDg3LC0xNDAuNTg0ODgpIj48ZyBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiPjxwYXRoIGQ9Ik0yMjEuNTQyNDQsMTgyLjUwMDAxdi01aDM2LjkxNTEzdjV6IiBmaWxsPSIjMDAwMWZmIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjxwYXRoIGQ9Ik0yMzcuNSwxOTguNDU3NTd2LTM2LjkxNTEyaDV2MzYuOTE1MTJ6IiBmaWxsPSIjMDFmZjAwIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjxwYXRoIGQ9Ik0yMzQuOTgzNDksMTYxLjU0MjQ0bDUuMDMzMDMsLTVsNS4wMzMwMyw1eiIgZmlsbD0iIzAxZmYwMCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjAiLz48cGF0aCBkPSJNMjM0LjQ1Nzk2LDE5MS40OTkwM2MtMS4xMDczNywwIC0yLjAwNTA4LC0wLjg5NzcxIC0yLjAwNTA4LC0yLjAwNTA5bC0wLjAxMzc3LC0xOS4wMTgzM2MwLC0xLjEwNzM3IDAuODk3NzEsLTIuMDA1MDggMi4wMDUwOCwtMi4wMDUwOGwxMS4xMTE2MiwwLjA0MjA1YzEuMTA3MzcsMCAyLjAwNTA4LDAuODk3NzEgMi4wMDUwOCwyLjAwNTA4bC0wLjEyOTIsMTkuMDA2NzNjMCwxLjEwNzM3IC0wLjg5NzcxLDIuMDA1MDggLTIuMDA1MDksMi4wMDUwOHoiIGZpbGw9IiMwMDAwMDAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTIzMy4xODg4OCwxODcuNDMyNjN2LTE2LjU4MTUyaDEzLjYyMjI0djE2LjU4MTUyeiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMjM3LjQ4MzQ5LDE2OS43MzYxNXYtMS4yNjU2MWg1LjAzMzAzdjEuMjY1NjF6IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHBhdGggZD0iTTIzOC43NDY4MywxODkuNDU5MjVjMCwtMC42OTIxMSAwLjU2MTA2LC0xLjI1MzE3IDEuMjUzMTcsLTEuMjUzMTdjMC42OTIxMSwwIDEuMjUzMTcsMC41NjEwNiAxLjI1MzE3LDEuMjUzMTdjMCwwLjY5MjExIC0wLjU2MTA2LDEuMjUzMTggLTEuMjUzMTcsMS4yNTMxOGMtMC42OTIxMSwwIC0xLjI1MzE3LC0wLjU2MTA3IC0xLjI1MzE3LC0xLjI1MzE4eiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxwYXRoIGQ9Ik0yMDUuNTg0ODcsMTgwLjAwMDAxYzAsLTE5LjAwNjk1IDE1LjQwODE4LC0zNC40MTUxMyAzNC40MTUxMywtMzQuNDE1MTNjMTkuMDA2OTUsMCAzNC40MTUxMywxNS40MDgxOCAzNC40MTUxMywzNC40MTUxM2MwLDE5LjAwNjk1IC0xNS40MDgxOCwzNC40MTUxMyAtMzQuNDE1MTMsMzQuNDE1MTNjLTE5LjAwNjk1LDAgLTM0LjQxNTEzLC0xNS40MDgxOCAtMzQuNDE1MTMsLTM0LjQxNTEzeiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmYwMDAwIiBzdHJva2Utd2lkdGg9IjIuNSIvPjxwYXRoIGQ9Ik0yNDAuMDM4MzMsMTUwLjU4NDg4di01aDV6IiBmaWxsPSIjZmYwMDAwIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjxwYXRoIGQ9Ik0yNDUuMDM4MzMsMTQ1LjU4NDg4aC01di01eiIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjAiLz48cGF0aCBkPSJNMjM0Ljk1ODg0LDIxNC40MTUxM2g1djV6IiBmaWxsPSIjZmYwMDAwIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjxwYXRoIGQ9Ik0yMzkuOTU4ODQsMjA5LjQxNTEzdjVoLTV6IiBmaWxsPSIjZmYwMDAwIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjxwYXRoIGQ9Ik0yMTYuNTQyNDQsMTgwLjAwMDAxbDUsLTV2MTB6IiBmaWxsPSIjMDAwMWZmIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjxwYXRoIGQ9Ik0yNTguNDcxMTUsMTg1LjAwMDE1di0xMGw1LDV6IiBmaWxsPSIjMDAwMWZmIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjxwYXRoIGQ9Ik0yNDQuOTUwMTgsMTk4LjQ1NzU3bC01LjAzMzAzLDVsLTUuMDMzMDMsLTV6IiBmaWxsPSIjMDFmZjAwIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIvPjwvZz48L2c+PC9zdmc+PCEtLXJvdGF0aW9uQ2VudGVyOjM1LjY2NTEzMDAwMDAwMDAwNTozOS40MTUxMjQ5OTk5OTk5OS0tPg==";
 
-  window.addEventListener("devicemotion", (event) => {
-    deviceMotionAccelX = event.acceleration.x;
-    deviceMotionAccelY = event.acceleration.y;
-    deviceMotionAccelZ = event.acceleration.z;
-    deviceRotationRateA = event.rotationRate.alpha;
-    deviceRotationRateB = event.rotationRate.beta;
-    deviceRotationRateC = event.rotationRate.gamma;
-    deviceMotionInterval = event.interval;
-  });
+window.addEventListener("devicemotion", (event) => {
+  deviceMotionAccelX = event.acceleration.x;
+  deviceMotionAccelY = event.acceleration.y;
+  deviceMotionAccelZ = event.acceleration.z;
+  deviceRotationRateA = event.rotationRate.alpha;
+  deviceRotationRateB = event.rotationRate.beta;
+  deviceRotationRateC = event.rotationRate.gamma;
+  deviceMotionInterval = event.interval;
+});
 
-  class gaimeriDeviceMotionExtension {
-    getInfo() {
-      return {
-        id: 'gaimeriDeviceMotionExtension',
-        name: 'Device Motion',
-        color1: "#55e9fc",
-        color2: "5595fc",
-        color3: "6955fc",
-        menuIconURI,
-        blocks: [
-          {
-            opcode: 'deviceAccelerationX',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'device acceleration x',
-            disableMonitor: false
-          },
-          {
-            opcode: 'deviceAccelerationY',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'device acceleration y',
-            disableMonitor: false
-          },
-          {
-            opcode: 'deviceAccelerationZ',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'device acceleration z',
-            disableMonitor: false
-          },
-          {
-            opcode: 'deviceRotationA',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'device rotation rate alpha',
-            disableMonitor: false
-          },
-          {
-            opcode: 'deviceRotationB',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'device rotation rate beta',
-            disableMonitor: false
+class gaimeriDeviceMotionExtension {
+  getInfo() {
+    return {
+      id: 'gaimeriDeviceMotionExtension',
+      name: 'Device Motion',
+      color1: "#55e9fc",
+      color2: "#5595fc",
+      color3: "#6955fc",
+      menuIconURI,
+      blocks: [
+        {
+          opcode: 'deviceAccelerationX',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device acceleration x',
+          disableMonitor: false
+        },
+        {
+          opcode: 'deviceAccelerationY',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device acceleration y',
+          disableMonitor: false
+        },
+        {
+          opcode: 'deviceAccelerationZ',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device acceleration z',
+          disableMonitor: false
+        },
+        {
+          opcode: 'deviceRotationA',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device rotation rate alpha',
+          disableMonitor: false
+        },
+        {
+          opcode: 'deviceRotationB',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device rotation rate beta',
+          disableMonitor: false
         },
         {
           opcode: 'deviceRotationC',
