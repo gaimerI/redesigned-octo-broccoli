@@ -592,19 +592,19 @@ class gaimeriWebAPIExtension {
           disableMonitor: false
         },
         {
-          opcode: 'batteryChargeLevel',
+          opcode: 'batteryChargingLevel',
           blockType: Scratch.BlockType.REPORTER,
           text: 'battery level',
           disableMonitor: false
         },
         {
-          opcode: 'batteryChargeTime',
+          opcode: 'batteryChargingTime',
           blockType: Scratch.BlockType.REPORTER,
           text: 'battery charging time',
           disableMonitor: false
         },
         {
-          opcode: 'batteryDischargeTime',
+          opcode: 'batteryDischargingTime',
           blockType: Scratch.BlockType.REPORTER,
           text: 'battery discharging time',
           disableMonitor: false
@@ -799,15 +799,15 @@ class gaimeriWebAPIExtension {
     return batteryCharging;
   }
 
-  batteryLevel(){
+  batteryChargingLevel(){
     return batteryLevel;
   }
 
-  batteryChargeTime() {
+  batteryChargingTime() {
     return batteryChargeTime;
   }
 
-  batteryDischargeTime(){
+  batteryDischargingTime(){
     return batteryDischargeTime;
   }
 }
