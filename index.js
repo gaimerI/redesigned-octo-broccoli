@@ -5,6 +5,10 @@ let deviceRotationRateA;
 let deviceRotationRateB;
 let deviceRotationRateC;
 let deviceMotionInterval;
+let batteryCharging;
+let batteryLevel;
+let batteryChargeTime;
+let batteryDischargeTime;
 
 let geolocationCoords = {"latitude": "unknown", "longitude": "unknown", "accuracy": "unknown"};
 
@@ -126,6 +130,44 @@ console.timeStamp = function(label) {
   consoleLoggedMessages.push(`Timestamp: ${label}`);
   originalConsoleTimeStamp.apply(console, arguments); // I am not sure if it's possible to use the time / timestamp etc. that the original method reports.
 };
+
+navigator.getBattery().then((battery) => {
+  function updateAllBatteryInfo() {
+    updateChargeInfo();
+    updateLevelInfo();
+    updateChargingInfo();
+    updateDischargingInfo();
+  }
+  updateAllBatteryInfo();
+
+  battery.addEventListener("chargingchange", () => {
+    updateChargeInfo();
+  });
+  function updateChargeInfo() {
+    batteryCharging = battery.charging ? true : false;
+  }
+
+  battery.addEventListener("levelchange", () => {
+    updateLevelInfo();
+  });
+  function updateLevelInfo() {
+    batteryLevel = battery.level * 100;
+  }
+
+  battery.addEventListener("chargingtimechange", () => {
+    updateChargingInfo();
+  });
+  function updateChargingInfo() {
+    batteryChargeTime = battery.chargingTime;
+  }
+
+  battery.addEventListener("dischargingtimechange", () => {
+    updateDischargingInfo();
+  });
+  function updateDischargingInfo() {
+    batteryDischargeTime = battery.dischargingTime;
+  }
+});
 
 class gaimeriWebAPIExtension {
   getInfo() {
@@ -509,6 +551,10 @@ class gaimeriWebAPIExtension {
           text: 'History API',
         },
         {
+          blockType: Scratch.BlockType.LABEL,
+          text: '(Moving does not really work)',
+        },
+        {
           opcode: 'historyBack',
           blockType: Scratch.BlockType.COMMAND,
           text: 'go back in history'
@@ -534,7 +580,35 @@ class gaimeriWebAPIExtension {
           blockType: Scratch.BlockType.REPORTER,
           text: 'history length',
           disableMonitor: true
-        }
+        },
+        {
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Battery API',
+        },
+        {
+          opcode: 'isBatteryCharging',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: 'battery charging?',
+          disableMonitor: false
+        },
+        {
+          opcode: 'batteryChargeLevel',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'battery level',
+          disableMonitor: false
+        },
+        {
+          opcode: 'batteryChargeTime',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'battery charging time',
+          disableMonitor: false
+        },
+        {
+          opcode: 'batteryDischargeTime',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'battery discharging time',
+          disableMonitor: false
+        },
       ]
     };
   }
@@ -719,6 +793,22 @@ class gaimeriWebAPIExtension {
 
   historyLength() {
     return history.length;
+  }
+
+  isBatteryCharging(){
+    return batteryCharging;
+  }
+
+  batteryLevel(){
+    return batteryLevel;
+  }
+
+  batteryChargingTime() {
+    return batteryChargeTime;
+  }
+
+  batteryDischargingTime(){
+    return batteryDischargeTime;
   }
 }
 
