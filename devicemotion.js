@@ -20,7 +20,7 @@ window.addEventListener("devicemotion", (event) => {
   deviceMotionAccelY = -1 * event.acceleration.y ?? 0;
   deviceMotionAccelZ = event.acceleration.z ?? 0;
   deviceMotionAccelMagnitude = Math.sqrt(deviceMotionAccelX * deviceMotionAccelX + deviceMotionAccelY * deviceMotionAccelY + deviceMotionAccelZ * deviceMotionAccelZ) ?? 0;
-  deviceMotionIsShaken = (deviceMotionAccelMagnitude > 30) ?? false;
+  deviceMotionIsShaken = (deviceMotionAccelMagnitude > 20) ?? false;
   deviceRotationRateA = event.rotationRate.alpha ?? 0;
   deviceRotationRateB = event.rotationRate.beta ?? 0;
   deviceRotationRateC = event.rotationRate.gamma ?? 0;
@@ -194,7 +194,7 @@ class gaimeriDeviceMotionExtension {
   }
 
   deviceMotionIsShakenSingle(){
-    return (deviceShakingTime = 1);
+    return (deviceShakingTime == 1);
   }
 }
 
