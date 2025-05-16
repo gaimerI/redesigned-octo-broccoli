@@ -14,7 +14,8 @@ window.addEventListener("devicemotion", (event) => {
   deviceRotationRateB = event.rotationRate.beta;
   deviceRotationRateC = event.rotationRate.gamma;
   deviceMotionInterval = event.interval;
-}
+});
+
 class gaimeriDeviceMotionExtension {
   getInfo() {
     return {
