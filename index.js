@@ -583,7 +583,7 @@ class gaimeriWebAPIExtension {
         },
         {
           blockType: Scratch.BlockType.LABEL,
-          text: 'Battery API',
+          text: 'Battery status API',
         },
         {
           opcode: 'isBatteryCharging',
