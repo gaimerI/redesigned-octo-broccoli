@@ -3,6 +3,7 @@ let deviceMotionAccelY = 0;
 let deviceMotionAccelZ = 0;
 let deviceMotionAccelMagnitude = 0;
 let deviceMotionIsShaken = false;
+let deviceShakingTime = 0;
 let deviceRotationRateA = 0;
 let deviceRotationRateB = 0;
 let deviceRotationRateC = 0;
@@ -19,11 +20,17 @@ window.addEventListener("devicemotion", (event) => {
   deviceMotionAccelY = -1 * event.acceleration.y ?? 0;
   deviceMotionAccelZ = event.acceleration.z ?? 0;
   deviceMotionAccelMagnitude = Math.sqrt(deviceMotionAccelX * deviceMotionAccelX + deviceMotionAccelY * deviceMotionAccelY + deviceMotionAccelZ * deviceMotionAccelZ) ?? 0;
-  deviceMotionIsShaken = (deviceMotionAccelMagnitude > 15) ?? false;
+  deviceMotionIsShaken = (deviceMotionAccelMagnitude > 30) ?? false;
   deviceRotationRateA = event.rotationRate.alpha ?? 0;
   deviceRotationRateB = event.rotationRate.beta ?? 0;
   deviceRotationRateC = event.rotationRate.gamma ?? 0;
   deviceMotionInterval = event.interval ?? 0;
+
+  if (deviceMotionIsShaken) {
+    deviceShakingTime += 1;
+  } else {
+    deviceShakingTime = 0;
+  }
 });
 
 window.addEventListener("deviceorientation", (event) => {
@@ -122,7 +129,13 @@ class gaimeriDeviceMotionExtension {
         {
           opcode: 'deviceMotionIsShakenContinuous',
           blockType: Scratch.BlockType.BOOLEAN,
-          text: 'is device shaken?',
+          text: 'device shaking?',
+          disableMonitor: false
+        },
+        {
+          opcode: 'deviceMotionIsShakenSingle',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: 'device shaken?',
           disableMonitor: false
         },
       ]
@@ -178,6 +191,10 @@ class gaimeriDeviceMotionExtension {
 
   deviceMotionIsShakenContinuous(){
     return deviceMotionIsShaken;
+  }
+
+  deviceMotionIsShakenSingle(){
+    return (deviceShakingTime = 1);
   }
 }
 
