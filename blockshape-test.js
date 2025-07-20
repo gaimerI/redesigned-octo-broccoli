@@ -7,8 +7,20 @@
         name: "Matrices",
         blocks: [
           {
-            opcode: 'create2DMatrix',
-            text: 'empty matrix of width [WIDTH] height [HEIGHT]',
+            opcode: 'create1DScalar',
+            text: 'scalar of value [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.SQUARE,
+            arguments: {
+              VALUE: {
+                type: Scratch.ArgumentType.NUMBER,
+                defaultValue: 2
+              }
+            }
+          },
+          {
+            opcode: 'createZero2DMatrix',
+            text: 'zero matrix of width [WIDTH] height [HEIGHT]',
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.SQUARE,
             arguments: {
@@ -26,9 +38,14 @@
       };
     }
 
-    create2DMatrix(args) {
-      return Array.from({ length: args.HEIGHT }, () =>
-        Array.from({ length: args.WIDTH }, () => null));
+    create1DScalar(args) {
+      return Math.floor(args.VALUE);
+    }
+    
+    createZero2DMatrix(args) {
+      const matrix = Array.from({ length: args.HEIGHT }, () =>
+        Array.from({ length: args.WIDTH }, () => 0));
+      return JSON.stringify(matrix);
     }
   }
 
