@@ -6,7 +6,7 @@
       SB.BlockSvg.registerCustomShape(
         "johnMyExtension-matrix",
         {
-          emptyInputPath: "m...z", // SVG Path (string) used for empty input slots
+          emptyInputPath: "M 0 0 L 10 0 L 10 10 L 0 10 Z", // SVG Path (string) used for empty input slots
           emptyInputWidth: 12 * SB.BlockSvg.GRID_UNIT, // Optional hard-coded width value for 'emptyInputPath'
           leftPath: (block) => {
             /*
@@ -50,7 +50,7 @@
               0: 3 * Blockly.BlockSvg.GRID_UNIT, // Field Input in custom shape
               1: 3 * Blockly.BlockSvg.GRID_UNIT, // Hexagon Input in custom shape
               2: 1 * Blockly.BlockSvg.GRID_UNIT, // Round Input in custom shape
-              ... /* more optional shapes */
+              /* more optional shapes */
             }
           }
         }
@@ -69,14 +69,16 @@
           },
 {
 opcode: 'myCoolShape',
-blockType: BlockType.REPORTER,
+blockType: Scratch.BlockType.REPORTER,
 blockShape: "johnMyExtension-matrix",
 text: 'custom shape [CUSTOM_EMPTY_BLOCK]',
 arguments: {
-CUSTOM_EMPTY_BLOCK: {
-shape: "johnMyExtension-matrix"
+  CUSTOM_EMPTY_BLOCK: {
+    type: Scratch.ArgumentType.STRING,
+    shape: "johnMyExtension-matrix"
+  }
 }
-}
+
 },
 
           {
