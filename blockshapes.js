@@ -213,7 +213,94 @@
               null,
               Scratch.ArgumentAlignment.RIGHT
             ]
-          }
+          },
+          {
+  opcode: 'roundBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.ROUND,
+  text: ['round', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'hexagonalBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.HEXAGONAL,
+  text: ['hexagonal', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'squareBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.SQUARE,
+  text: ['square', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'leafBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.LEAF,
+  text: ['leaf', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'plusBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.PLUS,
+  text: ['plus', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'octagonalBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.OCTAGONAL,
+  text: ['octagonal', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'bumpedBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.BUMPED,
+  text: ['bumped', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'indentedBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.INDENTED,
+  text: ['indented', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'scrappedBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.SCRAPPED,
+  text: ['scrapped', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'arrowBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.ARROW,
+  text: ['arrow', 'branch'],
+  branchCount: 1,
+},
+{
+  opcode: 'ticketBranched',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.TICKET,
+  text: ['ticket', 'branch'],
+  branchCount: 1,
+},
+                 {
+  opcode: 'mixedBranches',
+  text: 'mixed branches',
+  blockType: Scratch.BlockType.COMMAND,
+  branches: [
+    {},
+    {accepts: 'switchCase'}
+  ],
+  notchAccepts: 'switchCase'
+                 }
         ]
       }
     }
