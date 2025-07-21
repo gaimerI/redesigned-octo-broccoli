@@ -38,40 +38,162 @@
           },
           {
             opcode: 'octagonal',
-            text: 'OCTAGONAL [new!] (target/class)',
+            text: 'OCTAGONAL (new!) (target/class)',
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.OCTAGONAL,
           },
           {
             opcode: 'bumped',
-            text: 'BUMPED [new!] (BigInt)',
+            text: 'BUMPED (new!) (BigInt)',
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.BUMPED,
           },
           {
             opcode: 'indented',
-            text: 'INDENTED [new!] (symbol)',
+            text: 'INDENTED (new!) (symbol)',
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.INDENTED,
           },
           {
             opcode: 'scrapped',
-            text: 'SCRAPPED [new!] (map)',
+            text: 'SCRAPPED (new!) (map)',
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.SCRAPPED,
           },
           {
             opcode: 'arrow',
-            text: 'ARROW [new!] (set)',
+            text: 'ARROW (new!) (set)',
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.ARROW,
           },
           {
             opcode: 'ticket',
-            text: 'TICKET [new!] (date)',
+            text: 'TICKET (new!) (date)',
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.TICKET,
           },
+          {
+  opcode: 'roundInput',
+  text: 'ROUND [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.ROUND,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.ROUND
+    }
+  }
+},
+{
+  opcode: 'hexagonalInput',
+  text: 'HEXAGONAL [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.HEXAGONAL,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.HEXAGONAL
+    }
+  }
+},
+{
+  opcode: 'squareInput',
+  text: 'SQUARE [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.SQUARE,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.SQUARE
+    }
+  }
+},
+{
+  opcode: 'leafInput',
+  text: 'LEAF [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.LEAF,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.LEAF
+    }
+  }
+},
+{
+  opcode: 'plusInput',
+  text: 'PLUS [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.PLUS,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.PLUS
+    }
+  }
+},
+{
+  opcode: 'octagonalInput',
+  text: 'OCTAGONAL [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.OCTAGONAL,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.OCTAGONAL
+    }
+  }
+},
+{
+  opcode: 'bumpedInput',
+  text: 'BUMPED [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.BUMPED,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.BUMPED
+    }
+  }
+},
+{
+  opcode: 'indentedInput',
+  text: 'INDENTED [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.INDENTED,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.INDENTED
+    }
+  }
+},
+{
+  opcode: 'scrappedInput',
+  text: 'SCRAPPED [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.SCRAPPED,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.SCRAPPED
+    }
+  }
+},
+{
+  opcode: 'arrowInput',
+  text: 'ARROW [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.ARROW,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.ARROW
+    }
+  }
+},
+{
+  opcode: 'ticketInput',
+  text: 'TICKET [VALUE]',
+  blockType: Scratch.BlockType.REPORTER,
+  blockShape: Scratch.BlockShape.TICKET,
+  arguments: {
+    VALUE: {
+      shape: Scratch.BlockShape.TICKET
+    }
+  }
+}
+
         ]
       }
     }
