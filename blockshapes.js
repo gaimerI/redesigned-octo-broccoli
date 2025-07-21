@@ -5,8 +5,7 @@
       return {
         id: "test",
         name: "BlockShape Test",
-        blocks: [
-          {
+        blocks: [{
             opcode: 'round',
             text: 'ROUND (string/number)',
             blockType: Scratch.BlockType.REPORTER,
@@ -72,176 +71,193 @@
             blockType: Scratch.BlockType.REPORTER,
             blockShape: Scratch.BlockShape.TICKET,
           },
+          '---',
           {
-  opcode: 'roundInput',
-  text: 'ROUND [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.ROUND,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.ROUND
-    }
-  }
-},
-{
-  opcode: 'hexagonalInput',
-  text: 'HEXAGONAL [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.HEXAGONAL,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.HEXAGONAL
-    }
-  }
-},
-{
-  opcode: 'squareInput',
-  text: 'SQUARE [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.SQUARE,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.SQUARE
-    }
-  }
-},
-{
-  opcode: 'leafInput',
-  text: 'LEAF [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.LEAF,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.LEAF
-    }
-  }
-},
-{
-  opcode: 'plusInput',
-  text: 'PLUS [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.PLUS,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.PLUS
-    }
-  }
-},
-{
-  opcode: 'octagonalInput',
-  text: 'OCTAGONAL [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.OCTAGONAL,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.OCTAGONAL
-    }
-  }
-},
-{
-  opcode: 'bumpedInput',
-  text: 'BUMPED [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.BUMPED,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.BUMPED
-    }
-  }
-},
-{
-  opcode: 'indentedInput',
-  text: 'INDENTED [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.INDENTED,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.INDENTED
-    }
-  }
-},
-{
-  opcode: 'scrappedInput',
-  text: 'SCRAPPED [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.SCRAPPED,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.SCRAPPED
-    }
-  }
-},
-{
-  opcode: 'arrowInput',
-  text: 'ARROW [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.ARROW,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.ARROW
-    }
-  }
-},
-{
-  opcode: 'ticketInput',
-  text: 'TICKET [VALUE]',
-  blockType: Scratch.BlockType.REPORTER,
-  blockShape: Scratch.BlockShape.TICKET,
-  arguments: {
-    VALUE: {
-      shape: Scratch.BlockShape.TICKET
-    }
-  }
-}
-
+            opcode: 'roundInput',
+            text: 'ROUND [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.ROUND,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.ROUND
+              }
+            }
+          },
+          {
+            opcode: 'hexagonalInput',
+            text: 'HEXAGONAL [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.HEXAGONAL,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.HEXAGONAL
+              }
+            }
+          },
+          {
+            opcode: 'squareInput',
+            text: 'SQUARE [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.SQUARE,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.SQUARE
+              }
+            }
+          },
+          {
+            opcode: 'leafInput',
+            text: 'LEAF [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.LEAF,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.LEAF
+              }
+            }
+          },
+          {
+            opcode: 'plusInput',
+            text: 'PLUS [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.PLUS,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.PLUS
+              }
+            }
+          },
+          {
+            opcode: 'octagonalInput',
+            text: 'OCTAGONAL [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.OCTAGONAL,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.OCTAGONAL
+              }
+            }
+          },
+          {
+            opcode: 'bumpedInput',
+            text: 'BUMPED [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.BUMPED,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.BUMPED
+              }
+            }
+          },
+          {
+            opcode: 'indentedInput',
+            text: 'INDENTED [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.INDENTED,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.INDENTED
+              }
+            }
+          },
+          {
+            opcode: 'scrappedInput',
+            text: 'SCRAPPED [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.SCRAPPED,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.SCRAPPED
+              }
+            }
+          },
+          {
+            opcode: 'arrowInput',
+            text: 'ARROW [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.ARROW,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.ARROW
+              }
+            }
+          },
+          {
+            opcode: 'ticketInput',
+            text: 'TICKET [VALUE]',
+            blockType: Scratch.BlockType.REPORTER,
+            blockShape: Scratch.BlockShape.TICKET,
+            arguments: {
+              VALUE: {
+                shape: Scratch.BlockShape.TICKET
+              }
+            }
+          },
+          '---',
+          {
+            opcode: 'alignmentTest',
+            blockType: Scratch.BlockType.CONDITIONAL,
+            text: [
+              'this block tests alignments',
+              'left',
+              'middle',
+              'right'
+            ],
+            branchCount: 3,
+            alignments: [
+              null,
+              null,
+              Scratch.ArgumentAlignment.LEFT,
+              null,
+              Scratch.ArgumentAlignment.CENTER,
+              null,
+              Scratch.ArgumentAlignment.RIGHT
+            ]
+          }
         ]
       }
     }
-
     round() {
       return 'Hello, World!';
     }
-
     hexagonal() {
       return true;
     }
-
     square() {
-      return [1,2,3].toString();
+      return [1, 2, 3].toString();
     }
-
     leaf() {
-      return { x: 3, y: 3 }.toString();
+      return {
+        x: 3,
+        y: 3
+      }.toString();
     }
-
     plus() {
-      return { key: 'value' }.toString();
+      return {
+        key: 'value'
+      }.toString();
     }
-
     octagonal(args, util) {
       return util.target.getName().toString();
     }
-
     bumped() {
       return BigInt(9007199254740991).toString();
     }
-
     indented() {
       return Symbol('foo').toString();
     }
-
     scrapped() {
-      return new Map([["foo", "Foo"], ["bar", "Bar"]]).toString();
+      return new Map([
+        ["foo", "Foo"],
+        ["bar", "Bar"]
+      ]).toString();
     }
-
     arrow() {
       return new Set(["Foo", "Bar"]).toString();
     }
-
     ticket() {
       return new Date(8.64e15).toString();
     }
   }
-
-Scratch.extensions.register(new Extension());
+  Scratch.extensions.register(new Extension());
 })(Scratch);
