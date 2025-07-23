@@ -54,19 +54,34 @@ class gaimeriDeviceMotionExtension {
           opcode: 'deviceAccelerationX',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device acceleration x',
-          disableMonitor: false
+          disableMonitor: false,
+          hideFromPalette:  true
         },
         {
           opcode: 'deviceAccelerationY',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device acceleration y',
-          disableMonitor: false
+          disableMonitor: false,
+          hideFromPalette:  true
         },
         {
           opcode: 'deviceAccelerationZ',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device acceleration z',
-          disableMonitor: false
+          disableMonitor: false,
+          hideFromPalette:  true
+        },
+        {
+          opcode: 'deviceAccelerationOnAxis',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'device acceleration [AXIS]',
+          disableMonitor: false,
+          arguments: {
+            AXIS: {
+              menu: 'AXIS_MENU',
+              acceptReporters: false
+            }
+          }
         },
         {
           opcode: 'deviceAccelerationMagnitude',
@@ -138,7 +153,13 @@ class gaimeriDeviceMotionExtension {
           text: 'device shaken?',
           disableMonitor: false
         },
-      ]
+      ],
+      menus: {
+        AXIS_MENU: {
+          acceptReporters: true,
+          items: ['x', 'y', 'z']
+        }
+      }
     };
   }
   deviceAccelerationX(){
@@ -151,6 +172,20 @@ class gaimeriDeviceMotionExtension {
 
   deviceAccelerationZ(){
     return deviceMotionAccelZ;
+  }
+
+  deviceAccelerationOnAxis(args){
+    switch (args.AXIS) {
+      case "x":
+        return deviceMotionAccelX;
+        break;
+      case "y":
+        return deviceMotionAccelY;
+        break;
+      case "z":
+        return deviceMotionAccelZ;
+        break;
+    }
   }
 
   deviceAccelerationMagnitude(){
