@@ -40,6 +40,20 @@ window.addEventListener("deviceorientation", (event) => {
   deviceOrientationAbs = event.absolute ?? false;
 });
 
+    const Vector = {
+    Type: VectorType,
+    Block: {
+        blockType: BlockType.REPORTER,
+        blockShape: BlockShape.LEAF,
+        forceOutputType: "Vector",
+        disableMonitor: true
+    },
+    Argument: {
+        shape: BlockShape.LEAF,
+        check: ["Vector"]
+    }
+    }
+
 class gaimeriDeviceMotionExtension {
   getInfo() {
     return {
@@ -48,6 +62,7 @@ class gaimeriDeviceMotionExtension {
       color1: "#55e9fc",
       color2: "#5595fc",
       color3: "#6955fc",
+      blockText: "000000",
       menuIconURI,
       blocks: [
         {
@@ -75,7 +90,7 @@ class gaimeriDeviceMotionExtension {
           opcode: 'deviceAccelerationOnAxis',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device acceleration [AXIS]',
-          disableMonitor: false,
+          disableMonitor: true,
           arguments: {
             AXIS: {
               menu: 'AXIS_MENU',
@@ -128,7 +143,7 @@ class gaimeriDeviceMotionExtension {
           opcode: 'deviceMotionInterval',
           blockType: Scratch.BlockType.REPORTER,
           text: 'device motion capture interval (ms)',
-          disableMonitor: false
+          disableMonitor: true
         },
         '---',
         {
@@ -183,6 +198,21 @@ class gaimeriDeviceMotionExtension {
           text: 'device shaken?',
           disableMonitor: false
         },
+        {
+                    opcode: 'newVector',
+                    text: 'new vector x: [X] y: [Y]',
+                    arguments: {
+                        X: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0
+                        },
+                        Y: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0
+                        }
+                    },
+                    ...Vector.Block
+                },
       ],
       menus: {
         AXIS_MENU: {
@@ -292,6 +322,13 @@ deviceRotationOnAxis(args){
 
   deviceMotionIsShakenSingle(){
     return (deviceShakingTime == 1);
+  }
+
+  newVector(args) {
+        const X = Cast.toNumber(args.X)
+        const Y = Cast.toNumber(args.Y)
+
+        return new VectorType(X, Y)
   }
 }
 
