@@ -40,20 +40,6 @@ window.addEventListener("deviceorientation", (event) => {
   deviceOrientationAbs = event.absolute ?? false;
 });
 
-    const Vector = {
-    Type: VectorType,
-    Block: {
-        blockType: BlockType.REPORTER,
-        blockShape: BlockShape.LEAF,
-        forceOutputType: "Vector",
-        disableMonitor: true
-    },
-    Argument: {
-        shape: BlockShape.LEAF,
-        check: ["Vector"]
-    }
-    }
-
 class gaimeriDeviceMotionExtension {
   getInfo() {
     return {
@@ -198,21 +184,6 @@ class gaimeriDeviceMotionExtension {
           text: 'device shaken?',
           disableMonitor: false
         },
-        {
-                    opcode: 'newVector',
-                    text: 'new vector x: [X] y: [Y]',
-                    arguments: {
-                        X: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 0
-                        },
-                        Y: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 0
-                        }
-                    },
-                    ...Vector.Block
-                },
       ],
       menus: {
         AXIS_MENU: {
@@ -322,13 +293,6 @@ deviceRotationOnAxis(args){
 
   deviceMotionIsShakenSingle(){
     return (deviceShakingTime == 1);
-  }
-
-  newVector(args) {
-        const X = Cast.toNumber(args.X)
-        const Y = Cast.toNumber(args.Y)
-
-        return new VectorType(X, Y)
   }
 }
 
