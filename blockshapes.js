@@ -4,7 +4,7 @@ class MatrixType {
     }
 
     toString() {
-        return this.matrix;
+        return this.matrix.toString();
     }
 
     toReporterContent() {
@@ -72,14 +72,13 @@ class Extension {
                     }
                 },
                 {
-                    opcode: 'matrixFromArray',
+                    opcode: 'transposeMatrix',
                     blockType: Scratch.BlockType.REPORTER,
                     blockShape: Scratch.BlockShape.SQUARE,               
                     text: 'transpose matrix [MATRIX]',
                     arguments: {
                         MATRIX: {
-                            type: Scratch.ArgumentType.STRING,
-                            defaultValue: '[[1,2,3],[4,5,6],[7,8,9]]',
+                            shape: Scratch.BlockShape.SQUARE,
                             exemptFromNormalization: true
                         }
                     }
@@ -94,19 +93,9 @@ class Extension {
     
     emptyMatrixOfSize({ WIDTH, HEIGHT }) {
         const matrix = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(0));
-        return new MatrixType(matrix);
     }
 
-    transposeMatrix(matrix) {
-        const transposed = [];
-        for (let i = 0; i < matrix[0].length; i++) {
-            transposed[i] = [];
-            for (let j = 0; j < matrix.length; j++) {
-                transposed[i][j] = matrix[j][i];
-            }
-        }
-        return new MatrixType(transposed);
-    }
+
 }
 
 Scratch.extensions.register(new Extension());
