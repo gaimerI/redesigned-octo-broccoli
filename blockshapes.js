@@ -71,18 +71,6 @@ class Extension {
                         },
                     }
                 },
-                {
-                    opcode: 'transposeMatrix',
-                    blockType: Scratch.BlockType.REPORTER,
-                    blockShape: Scratch.BlockShape.SQUARE,               
-                    text: 'transpose matrix [MATRIX]',
-                    arguments: {
-                        MATRIX: {
-                            shape: Scratch.BlockShape.SQUARE,
-                            exemptFromNormalization: true
-                        }
-                    }
-                },
             ]
         }
     }
