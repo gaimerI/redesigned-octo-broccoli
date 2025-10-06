@@ -1,10 +1,18 @@
+function getMatrix(MATRIX) {
+    return MATRIX instanceof MatrixType ? MATRIX.matrix : MATRIX
+}
+
+function deepCopyMatrix(matrix) {
+    return matrix.map(row => row.slice());
+}
+
 class MatrixType {
     constructor(matrix) {
         this.matrix = matrix;
     }
 
     toString() {
-        return this.matrix;
+        return this.matrix.toString();
     }
 
     toReporterContent() {
@@ -105,7 +113,57 @@ class Extension {
                             exemptFromNormalization: true
                         },
                     }
-                }
+                },
+                {
+                    text: 'Values',
+                    blockType: Scratch.BlockType.LABEL
+                },
+                {
+                    opcode: 'getItemInMatrix',
+                    text: 'get row [ROW] col [COL] of [MATRIX]',
+                    blockType: Scratch.BlockType.REPORTER,
+                    blockShape: Scratch.BlockShape.ROUND,
+                    arguments: {
+                        ROW: {
+                            type: Scratch.ArgumentType.NUMBER,
+                            defaultValue: 1,
+                            exemptFromNormalization: true
+                        },
+                        COL: {
+                            type: Scratch.ArgumentType.NUMBER,
+                            defaultValue: 1,
+                            exemptFromNormalization: true
+                        },
+                        MATRIX: {
+                            shape: Scratch.BlockShape.SQUARE,
+                            exemptFromNormalization: true
+                        },
+                    }
+                },
+                {
+                    opcode: 'widthOfMatrix',
+                    text: 'width of [MATRIX]',
+                    blockType: Scratch.BlockType.REPORTER,
+                    blockShape: Scratch.BlockShape.ROUND,
+                    arguments: {
+                        MATRIX: {
+                            shape: Scratch.BlockShape.SQUARE,
+                            exemptFromNormalization: true
+                        },
+                    }
+                },
+                {
+                    opcode: 'heightOfMatrix',
+                    text: 'height of [MATRIX]',
+                    blockType: Scratch.BlockType.REPORTER,
+                    blockShape: Scratch.BlockShape.ROUND,
+                    arguments: {
+                        MATRIX: {
+                            shape: Scratch.BlockShape.SQUARE,
+                            exemptFromNormalization: true
+                        },
+                    }
+                },
             ]
         }
     }
@@ -120,20 +178,45 @@ class Extension {
     }
 
     setItemInMatrix({ ROW, COL, MATRIX, VALUE }) {
-    // Check if MATRIX is an array
-    if (!Array.isArray(MATRIX)) {
-        return typeof MATRIX;
+        const actualMatrix = deepCopyMatrix(getMatrix(MATRIX));
+        if (!Array.isArray(actualMatrix)) {
+            return "";
+        }
+        if (
+            COL < 1 ||
+            COL > actualMatrix.length ||
+            ROW < 1 ||
+            ROW > actualMatrix[COL - 1].length
+        ) {
+            return MATRIX;
+        }
+        actualMatrix[ROW - 1][COL - 1] = VALUE;
+        return new MatrixType(actualMatrix);
     }
 
-    // Ensure ROW and COL are within bounds of the matrix
-    if (ROW < 0 || ROW >= MATRIX.length || COL < 0 || COL >= MATRIX[ROW].length) {
-        throw new Error('Invalid indices: ROW or COL is out of bounds.');
+    widthOfMatrix({ MATRIX }) {
+        return getMatrix(MATRIX)[0].length;
     }
 
-    MATRIX[ROW][COL] = VALUE; // Set the value at the specified row and column
-    return MATRIX; // Return the modified matrix
-}
+    heightOfMatrix({ MATRIX }) {
+        return getMatrix(MATRIX).length;
+    }
 
+    getItemInMatrix({ ROW, COL, MATRIX, VALUE }) {
+        const actualMatrix = getMatrix(MATRIX);
+        if (!Array.isArray(actualMatrix)) {
+            return "";
+        }
+        if (
+            COL < 1 ||
+            COL > actualMatrix.length ||
+            ROW < 1 ||
+            ROW > actualMatrix[COL - 1].length
+        ) {
+            return MATRIX;
+        }
+        return actualMatrix[ROW - 1][COL - 1];
+    }
 }
 
 Scratch.extensions.register(new Extension());
