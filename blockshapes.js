@@ -4,7 +4,7 @@ class MatrixType {
     }
 
     toString() {
-        return this.matrix.toString();
+        return this.matrix;
     }
 
     toReporterContent() {
@@ -41,6 +41,10 @@ class Extension {
             name: 'Matrices',
             blocks: [
                 {
+                    text: 'Creation',
+                    blockType: Scratch.BlockType.LABEL
+                },
+                {
                     opcode: 'matrixFromArray',
                     text: 'nested array [ARRAY] to matrix',
                     blockType: Scratch.BlockType.REPORTER,
@@ -71,6 +75,37 @@ class Extension {
                         },
                     }
                 },
+                {
+                    text: 'Modification',
+                    blockType: Scratch.BlockType.LABEL
+                },
+                {
+                    opcode: 'setItemInMatrix',
+                    text: 'set row [ROW] col [COL] of [MATRIX] to [VALUE]',
+                    blockType: Scratch.BlockType.REPORTER,
+                    blockShape: Scratch.BlockShape.SQUARE,
+                    arguments: {
+                        ROW: {
+                            type: Scratch.ArgumentType.NUMBER,
+                            defaultValue: 1,
+                            exemptFromNormalization: true
+                        },
+                        COL: {
+                            type: Scratch.ArgumentType.NUMBER,
+                            defaultValue: 1,
+                            exemptFromNormalization: true
+                        },
+                        VALUE: {
+                            type: Scratch.ArgumentType.NUMBER,
+                            defaultValue: 2,
+                            exemptFromNormalization: true
+                        },
+                        MATRIX: {
+                            shape: Scratch.BlockShape.SQUARE,
+                            exemptFromNormalization: true
+                        },
+                    }
+                }
             ]
         }
     }
@@ -81,8 +116,23 @@ class Extension {
     
     emptyMatrixOfSize({ WIDTH, HEIGHT }) {
         const matrix = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(0));
+        return new MatrixType(matrix);
     }
 
+    setItemInMatrix({ ROW, COL, MATRIX, VALUE }) {
+    // Check if MATRIX is an array
+    if (!Array.isArray(MATRIX)) {
+        return typeof MATRIX;
+    }
+
+    // Ensure ROW and COL are within bounds of the matrix
+    if (ROW < 0 || ROW >= MATRIX.length || COL < 0 || COL >= MATRIX[ROW].length) {
+        throw new Error('Invalid indices: ROW or COL is out of bounds.');
+    }
+
+    MATRIX[ROW][COL] = VALUE; // Set the value at the specified row and column
+    return MATRIX; // Return the modified matrix
+}
 
 }
 
